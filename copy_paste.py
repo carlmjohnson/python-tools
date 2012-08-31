@@ -86,7 +86,7 @@ class PasteBoard(object):
     def __str__(self):
         return paste()
     
-    __pos__ = __str__ #Fast way to get a true string: +pb
+    __pos__ = __str__ #Fast way to get a true string: +p
     
     def __iter__(self):
         return iter(paste())
@@ -100,7 +100,7 @@ class PasteBoard(object):
     def __call__(self, s):
         copy(s)
     
-    __div__ = __call__ #Fast way to copy something: cb/"Text."
+    __truediv__ = __call__ #Fast way to copy something: p/"Text."
     
     def sort(self, spliton=None, key=lambda item: item.lower()):
         "Sorts the words on the pasteboard."
