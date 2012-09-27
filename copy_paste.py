@@ -5,6 +5,8 @@
 import functools
 from subprocess import Popen, PIPE
 
+#_macrondict maps from characters with a circumflex to the corresponding
+#character with a macron, e.g. â to ā
 _macrondict = {194: 256, 219: 362, 234: 275, 226: 257, 238: 299, 
                244: 333, 206: 298, 212: 332, 251: 363, 202: 274}
 
@@ -212,10 +214,41 @@ class PasteBoard(object):
 
 @PasteBoard
 def p(r): 
+    """p is a convenience object meant to be used in an interactive Python
+    shell. p.foo() is a shortcut equivalent of paste().foo(). It returns a 
+    string for use in further Python functions, saving the step of first 
+    turning the contents of the clipboard into a string.
+    
+    Sample usage:
+    
+    >>> p
+    PasteBoard('Hello, World!')
+    >>> p.upper()
+    'HELLO, WORLD!'
+    >>> p.nonascii()
+    ''
+    >>> p.ascii()
+    'Hello, World!'
+    >>> p.rformat("Hello, '{}'!")
+    "Hello, 'Hello, World!'!"
+    """
+    
     return r
 
 @PasteBoard
-def c(s): 
+def c(s):
+    """c is a convenience object meant to be used in an interactive Python
+    shell. c.foo() is a shortcut equivalent of copy(paste().foo()).
+    
+    Sample usage:
+    
+    >>> c("Hello, World!")
+    >>> c.upper()
+    Copied 'HELLO, WORLD!'.
+    >>> c.lower()
+    Copied 'hello, world!'.
+    """
+    
     copy(s)
     print("Copied %r." % s)
 
