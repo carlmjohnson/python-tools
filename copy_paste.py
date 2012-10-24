@@ -210,6 +210,16 @@ class PasteBoard(object):
         "Converts text from using circumflexes to macrons."
         text = paste().translate(_macrondict)
         return self._f(text)
+    
+    def character_info(self):
+        import unicodedata
+        formatter = "U+{:04x} {!r}\t{}".format
+        for char in paste():
+            try:
+                name = unicodedata.name(char)
+            except ValueError:
+                name = "No Name"
+            print(formatter(ord(char), char, name))
 
 
 @PasteBoard
